@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5ecd9">
+  <title>Lantern Lane · Spot the Difference</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./src/main.js"></script>
+</head>
+<body>
+  <main class="shell" id="lantern-lane" data-phase="title">
+    <header class="masthead">
+      <div class="brand">
+        <svg class="brand-seal" viewBox="0 0 56 66" aria-hidden="true">
+          <path d="M28 7V2M23 60h10m-5 0v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M19 10h18l3 7c8 5 12 11 12 20 0 10-5 16-13 19H17C9 53 4 47 4 37c0-9 4-15 12-20Z" fill="currentColor"/>
+          <path d="M17 18h22m-23 37h24M9 30c10-4 28-4 38 0M8 38c9-4 31-4 40 0M11 46c10-4 24-4 34 0m-22 7c-6-9-6-25 0-33m10 33c6-9 6-25 0-33" fill="none" stroke="#f8ecd3" stroke-width="1.1"/>
+          <path d="m28 27 2.3 5.7L36 35l-5.7 2.3L28 43l-2.3-5.7L20 35l5.7-2.3Z" fill="#f8ecd3"/>
+        </svg>
+        <div>
+          <p class="brand-type">Spot the Difference</p>
+          <h1>Lantern Lane</h1>
+        </div>
+      </div>
+
+      <section class="title-ticket" id="title-ticket" aria-labelledby="round-title">
+        <div>
+          <h2 id="round-title">Find 7 differences</h2>
+          <p>Something changed after dusk.</p>
+        </div>
+        <button class="primary" id="start" type="button">Start <span aria-hidden="true">→</span></button>
+      </section>
+
+      <section class="scoreboard" id="scoreboard" aria-label="Round statistics" hidden>
+        <div class="remaining">
+          <span class="metric-label">Remaining</span>
+          <strong id="remaining">7</strong>
+        </div>
+        <div class="found">
+          <span class="metric-label">Found</span>
+          <strong id="found">0 <small>/ 7</small></strong>
+          <div class="progress" id="progress" aria-hidden="true"></div>
+        </div>
+        <div>
+          <span class="metric-label">Time</span>
+          <strong id="timer">0:00</strong>
+        </div>
+        <div>
+          <span class="metric-label">Misses</span>
+          <strong id="misses">0</strong>
+        </div>
+      </section>
+
+      <section class="win-ticket" id="win-ticket" aria-labelledby="win-title" hidden>
+        <svg viewBox="0 0 40 48" class="win-seal" aria-hidden="true">
+          <path d="M10 29 7 45l7-4 5 4 1-11m10-5 3 16-7-4-5 4-1-11" fill="#db9f62" stroke="#db9f62" stroke-linejoin="round"/>
+          <path d="M20 3 26 7 33 8 35 15 38 21 33 26 30 33 23 33 16 36 11 31 5 28 6 21 3 15 9 11 13 5Z" fill="#f9d58b"/>
+          <path d="m13 20 5 5 10-11" fill="none" stroke="#324c40" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h2 id="win-title">All 7 found!</h2>
+          <p id="win-summary"></p>
+        </div>
+        <button class="primary" id="again" type="button">Play again <span aria-hidden="true">↻</span></button>
+      </section>
+    </header>
+
+    <section class="comparison" aria-label="Night market comparison">
+      <figure class="print original">
+        <figcaption id="label-original">
+          <span class="panel-label"><b aria-hidden="true">A</b> Original</span>
+          <span class="panel-caption">The night market</span>
+        </figcaption>
+        <svg class="picture" id="original" role="group" tabindex="-1" aria-labelledby="label-original" aria-describedby="controls-guide">
+          <g class="art" aria-hidden="true"></g><g class="marks" aria-hidden="true"></g><g class="hint-layer" aria-hidden="true"></g><g class="miss-layer" aria-hidden="true"></g><g class="aim-layer" aria-hidden="true"></g>
+        </svg>
+      </figure>
+      <figure class="print changed">
+        <figcaption id="label-changed">
+          <span class="panel-label"><b aria-hidden="true">B</b> Changed</span>
+          <span class="panel-caption">Seven small changes</span>
+        </figcaption>
+        <svg class="picture" id="changed" role="group" tabindex="-1" aria-labelledby="label-changed" aria-describedby="controls-guide">
+          <g class="art" aria-hidden="true"></g><g class="marks" aria-hidden="true"></g><g class="hint-layer" aria-hidden="true"></g><g class="miss-layer" aria-hidden="true"></g><g class="aim-layer" aria-hidden="true"></g>
+        </svg>
+      </figure>
+    </section>
+
+    <footer class="toolbar">
+      <p class="guide" id="controls-guide">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2v6m0 16v6M2 16h6m16 0h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        </svg>
+        <span><strong id="guide-lead">Look closely.</strong> <span id="guide-copy">Select a difference on either picture.</span><span class="sr-only"> With a picture focused, aim with the arrow keys and select with Enter or Space.</span></span>
+      </p>
+      <div class="tools" id="tools" hidden>
+        <button class="secondary" type="button" id="hint" aria-keyshortcuts="H">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c.9 6.5 3.9 9.5 10.5 10.5C16 13 13 16 12 22.5 11 16 8 13 1.5 12 8 11 11 8 12 1.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Hint <span class="hint-count" id="hint-count">3</span><kbd>H</kbd>
+        </button>
+        <button class="secondary" type="button" id="restart" aria-keyshortcuts="R">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10a9 9 0 1 1 1.7 7.5M3 4v6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Restart <kbd>R</kbd>
+        </button>
+      </div>
+    </footer>
+    <p class="sr-only" id="announcement" role="status"></p>
+  </main>
+</body>
+</html>
